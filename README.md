@@ -1,3 +1,11 @@
+This fork adds full NVME support to sedutil:
+- NVME drives can be unlocked in the PBA
+- NVME drives are found when scanning with sedutil-cli
+
+Image binaries are available in the Releases section.
+
+**************
+
 ![alt tag](https://avatars0.githubusercontent.com/u/13870012?v=3&s=200)
 
 This software is Copyright 2014-2016 Bright Plaza Inc. <drivetrust@drivetrust.com>
@@ -36,3 +44,5 @@ Source code is available on GitHub at https://github.com/Drive-Trust-Alliance/se
 Linux and Windows executables are available at https://github.com/Drive-Trust-Alliance/sedutil/wiki/Executable-Distributions
 
 If you are looking for the PSID revert function see linux/PSIDRevert_LINUX.txt or win32/PSIDRevert_WINDOWS.txt
+
+
