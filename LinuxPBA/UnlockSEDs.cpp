@@ -35,16 +35,22 @@ uint8_t UnlockSEDs(char * password) {
     LOG(D4) << "Enter UnlockSEDs";
     mvprintw(6,2,"Scanning....");
     while (TRUE) {
+        failed = 0;
         switch(DtaDevOS::getNextDevice(i)){
             case 1  : snprintf(devref,23,"/dev/%s",DtaDevOS::getDeviceName()); break;
             case -1 : snprintf(devref,23,"/dev/sd%c",(char) 0x61+i);    break;
-            default : snprintf(devref,23,"/dev/sdX"); break;
+            default : failed = 1;break;
         }
-         i += 1;
+        i += 1;
+	if(failed == 1)break;
 	tempDev = new DtaDevGeneric(devref);
-	if (!tempDev->isPresent()) {break;}
+	if (!tempDev->isPresent()) {
+             mvprintw(7+i,2,"Drive %s is not present",devref);
+             delete tempDev;
+             continue;
+	}
         if ((!tempDev->isOpal1()) && (!tempDev->isOpal2())) {
-             mvprintw(7+i,2,"Drive %s not supported  ",devref);
+             mvprintw(7+i,2,"Drive %s is not supported",devref);
              delete tempDev;
              continue;
         }
